@@ -32,5 +32,23 @@ exports.create_post = [
   }
 ];
 
-exports.delete_get = ;
-exports.delete_post = ;
+exports.delete_get = function(req, res) {
+  Message.findById(req.params.id)
+  .exec(function (err, message) {
+    if (err) { return next(err); }
+    if (message==null) { // No results.
+        var err = new Error('Message not found');
+        err.status = 404;
+        return next(err);
+      }
+    // Successful, so render.
+    res.render('message_delete', { title: 'Delete Message', message:  message});
+  })
+};
+exports.delete_post = function(req, res) {
+  Message.findByIdAndRemove(req.body.messageid, function deleteMessage(err) {
+      if (err) { return next(err); }
+      // Success - go to index
+      res.redirect('/')
+  })
+};
