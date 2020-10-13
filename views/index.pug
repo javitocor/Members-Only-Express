@@ -1,4 +1,28 @@
 extends layout
 
 block content
-  h1 #{title}
+  h1 Welcome to #[em MembersOnlyClub], a very secret club only for members.
+
+  if !currentUser.status 
+    p
+      a(href=) Member Code
+  if !currentUser.admin 
+    p
+      a(href=) Admin Code
+  h2 #{title}
+
+  ul
+    each message in list_messages
+      li 
+        p #[strong Title:] #{message.title}
+        p #[strong Message:] #{message.text}
+        if currentUser.status 
+          p #[strong Author:] #{message.owner}
+          p #[strong Date:] #{message.timestamp}
+        if currentUser.admin 
+          p
+            a(href=) Delete Message
+    else
+      li There are no messages
+
+
