@@ -1,7 +1,6 @@
 var User = require('../models/user');
 var Message = require('../models/message');
 const bcrypt = require('bcryptjs');
-const session = require("express-session");
 const passport = require("passport");
 const { body,validationResult } = require('express-validator');
 
@@ -13,7 +12,6 @@ exports.index = function(req, res, next) {
 };
 
 exports.signup_get = (req, res) => res.render("sign-up-form");
-
 
 exports.signup_post = (req, res, next) => {
   const user = new User({
