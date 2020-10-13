@@ -1,8 +1,7 @@
 var User = require('../models/user');
 const { body, validationResult } = require('express-validator');
-var async = require('async');
 
-exports.member_get = (req, res) => res.render("member-form", { title: 'MemberShip Access' });;
+exports.member_get = (req, res) => res.render("member-form", { title: 'MemberShip Access' });
 exports.member_post  = [
   // Validate and santise the name field.
   body('member', 'Member required').isLength({ min: 1 }).trim().escape(),
