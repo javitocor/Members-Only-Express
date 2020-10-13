@@ -8,7 +8,13 @@ var async = require('async');
 
 
 exports.index = function(req, res, next) {
-  res.render('index', { title: 'MessagesBoard' });
+  Message.find({}, 'title owner')
+    .populate('owner')
+    .exec(function (err, list_messages) {
+      if (err) { return next(err); }
+      //Successful, so render
+      res.render('index', { title: 'MessagesBoard', list_messages: list_messages });
+    });
 };
 
 exports.signup_get = (req, res) => res.render("sign-up-form");

@@ -6,8 +6,8 @@ block content
           
   form(method='POST' action='')
     div.form-group
-      label(for='name') Membership code:
-      input#name.form-control(type='text', placeholder='Add your membership secret code' name='member' required='true' value='' )
+      label(for='member') Membership code:
+      input#member.form-control(type='text', placeholder='Add your membership secret code' name='member' required='true' value='' )
     button.btn.btn-primary(type='submit') Submit
 
   if errors 

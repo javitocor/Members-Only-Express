@@ -6,8 +6,8 @@ block content
           
   form(method='POST' action='')
     div.form-group
-      label(for='name') Admin code:
-      input#name.form-control(type='text', placeholder='Add your admin secret code' name='admin' required='true' value='' )
+      label(for='admin') Admin code:
+      input#admin.form-control(type='text', placeholder='Add your admin secret code' name='admin' required='true' value='' )
     button.btn.btn-primary(type='submit') Submit
 
   if errors 

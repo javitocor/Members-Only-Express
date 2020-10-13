@@ -1,0 +1,18 @@
+extends layout
+
+block content
+
+  h1 #{title}: #{currentUser.username}
+          
+  form(method='POST' action='')
+    div.form-group
+      label(for='title') Membership code:
+      input#title.form-control(type='text', placeholder='Add your title' name='title' required='true' value='' )
+      label(for='text') Membership code:
+      input#text.form-control(type='text', placeholder='Add your message' name='text' required='true' value='' )
+    button.btn.btn-primary(type='submit') Submit
+
+  if errors 
+    ul
+      for error in errors
+        li!= error.msg
