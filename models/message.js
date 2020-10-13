@@ -13,7 +13,7 @@ var MessageSchema = new Schema({
 MessageSchema
 .virtual('url')
 .get(function () {
-  return '/message/'+this._id;
+  return '/deletemessage/'+this._id;
 });
 
 // Export model.

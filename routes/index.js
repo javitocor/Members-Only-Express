@@ -20,6 +20,10 @@ router.get("/log-out", index_controller.logout_get);
 //Get create message page
 router.get('/createmessage', message_controller.create_get);
 //Post create message page
-router.post('/createmessage', message_controller.create_post)
+router.post('/createmessage', message_controller.create_post);
+//Get delete message
+router.get('/deletemessage/:id', message_controller.delete_get);
+//Post delete message
+router.post('/deletemessage/:id', message_controller.delete_post);
 
 module.exports = router;

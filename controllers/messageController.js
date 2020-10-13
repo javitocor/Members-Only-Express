@@ -31,3 +31,6 @@ exports.create_post = [
     }
   }
 ];
+
+exports.delete_get = ;
+exports.delete_post = ;
