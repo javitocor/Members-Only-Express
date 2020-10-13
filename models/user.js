@@ -11,7 +11,14 @@ var UserSchema = new Schema({
     image: {type: String},
 });
 
-// Virtual for this Item instance URL.
+ItemSchema
+.virtual('imageUrl')
+.get(function () {
+  const pathJPG = `/images/${this.image}`;
+  return pathJPG;
+});
+
+// Virtual for this User instance URL.
 UserSchema
 .virtual('url')
 .get(function () {
