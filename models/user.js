@@ -7,11 +7,12 @@ var UserSchema = new Schema({
     lname: {type: String, required: true, min: 2, max: 20},
     username: {type: String, required: true},
     password: {type: String, required: true, min: 5},
-    status: {type: String, required: true},
+    status: {type: Boolean, default: false},
+    admin: {type: Boolean, default: false},
     image: {type: String},
 });
 
-ItemSchema
+UserSchema
 .virtual('imageUrl')
 .get(function () {
   const pathJPG = `/images/${this.image}`;

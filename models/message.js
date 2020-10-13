@@ -6,14 +6,14 @@ var MessageSchema = new Schema({
     title: {type: String, required: true, min: 3, max: 20},
     text: {type: String, required: true, min: 5, max: 250},
     owner: {type: Schema.ObjectId, ref: 'User', required: true},
-    timestamp: {type: Number, required: true, min: 0},
+    timestamp: {type : Date, default: Date.now },
 });
 
 // Virtual for this Message instance URL.
 MessageSchema
 .virtual('url')
 .get(function () {
-  return '/Message/'+this._id;
+  return '/message/'+this._id;
 });
 
 // Export model.
