@@ -2,7 +2,7 @@ var User = require('../models/user');
 var Message = require('../models/message');
 const bcrypt = require('bcryptjs');
 const passport = require("passport");
-const { body,validationResult } = require('express-validator');
+const { body, validationResult } = require('express-validator');
 
 var async = require('async');
 
