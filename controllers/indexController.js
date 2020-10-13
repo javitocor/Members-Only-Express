@@ -8,7 +8,7 @@ var async = require('async');
 
 
 exports.index = function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'MessagesBoard' });
 };
 
 exports.signup_get = (req, res) => res.render("sign-up-form");
