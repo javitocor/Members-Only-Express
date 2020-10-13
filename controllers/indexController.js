@@ -10,6 +10,7 @@ var async = require('async');
 exports.index = function(req, res, next) {
   Message.find({}, 'title owner')
     .populate('owner')
+    .sort([['timestamp', 'descending']])
     .exec(function (err, list_messages) {
       if (err) { return next(err); }
       //Successful, so render
