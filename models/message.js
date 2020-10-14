@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var moment = require('moment');
 
 var Schema = mongoose.Schema;
 
@@ -14,6 +15,12 @@ MessageSchema
 .virtual('url')
 .get(function () {
   return '/deletemessage/'+this._id;
+});
+
+MessageSchema
+.virtual('timestamp_formatted')
+.get(function () {
+  return moment(this.timestamp).format('MMMM Do YYYY, h:mm:ss a');
 });
 
 // Export model.
