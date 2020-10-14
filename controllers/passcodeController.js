@@ -1,4 +1,5 @@
 var User = require('../models/user');
+const Message = require('../models/message');
 const { body, validationResult } = require('express-validator');
 
 exports.member_get = (req, res) => res.render("member-form", { title: 'MemberShip Access' });
@@ -14,6 +15,9 @@ exports.member_post  = [
       res.render('member-form', { title: 'MemberShip Access', errors: errors.array()});
       return;
     } else {
+      const messages = function(callback) {
+        Message.find(callback);
+      }
       // Data from form is valid.
       //Validate correct passcode
       if(req.body.member === process.env.MEMBER_PASSCODE) {
@@ -21,10 +25,24 @@ exports.member_post  = [
         User.findByIdAndUpdate(req.user._id, {status: true}, function (err,theuser) {
           if (err) { return next(err); }
              // Successful - redirect to index page.
-             
+             Message.find({}, 'title text owner')
+            .populate('owner')
+            .sort([['timestamp', 'descending']])
+            .exec(function (err, list_messages) {
+              if (err) { return next(err); }
+              //Successful, so render
+              res.render('index', { title: 'MessagesBoard', list_messages: list_messages });
+            });
           });        
       } else {
-        res.redirect('index', { title: 'MessagesBoard' });
+        Message.find({}, 'title text owner')
+        .populate('owner')
+        .sort([['timestamp', 'descending']])
+        .exec(function (err, list_messages) {
+          if (err) { return next(err); }
+          //Successful, so render
+          res.render('index', { title: 'MessagesBoard', list_messages: list_messages });
+        });
       }
     }
   }
@@ -49,10 +67,24 @@ exports.admin_post = [
         User.findByIdAndUpdate(req.user._id, {admin: true}, function (err,theuser) {
           if (err) { return next(err); }
              // Successful - redirect to index page.
-             
+             Message.find({}, 'title text owner')
+            .populate('owner')
+            .sort([['timestamp', 'descending']])
+            .exec(function (err, list_messages) {
+              if (err) { return next(err); }
+              //Successful, so render
+              res.render('index', { title: 'MessagesBoard', list_messages: list_messages });
+            });
           });        
       } else {
-        res.redirect('index', { title: 'MessagesBoard' });
+        Message.find({}, 'title text owner')
+        .populate('owner')
+        .sort([['timestamp', 'descending']])
+        .exec(function (err, list_messages) {
+          if (err) { return next(err); }
+          //Successful, so render
+          res.render('index', { title: 'MessagesBoard', list_messages: list_messages });
+        });
       }
     }
   }

@@ -25,6 +25,7 @@ var mongoDB = process.env.MONGODB_URI || dev_db_url;
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
+mongoose.set('useFindAndModify', false);
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // view engine setup
