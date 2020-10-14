@@ -26,7 +26,11 @@ exports.signup_post = [
   body('lname', 'Last Name required').isLength({ min: 2 }).trim().escape(),
   body('password', 'Password required').isLength({ min: 5 }).trim().escape(),
   body('username', 'Username required').isLength({ min: 3 }).trim().escape(),
-
+  body('passwordConfirmation').custom((value, { req }) => {
+    if (value !== req.body.password) {
+      throw new Error('Password confirmation does not match password');
+    };
+  }),
   (req, res, next) => {
     // Extract the validation errors from a request.
     const errors = validationResult(req);
