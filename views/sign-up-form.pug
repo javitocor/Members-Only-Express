@@ -17,6 +17,9 @@ block content
     div.form-group
       label(for='password') Password:
       input#password.form-control(type='text', placeholder='Add your password' name='password' required='true' value='' )
+    div.form-group    
+      label(for='passwordConfirmation') Password:
+      input#passwordConfirmation.form-control(type='text', placeholder='Confirm your password' name='passwordConfirmation' required='true' value='' )
     button.btn.btn-primary(type='submit') Submit
   
   if errors 
