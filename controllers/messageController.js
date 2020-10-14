@@ -21,7 +21,7 @@ exports.create_post = [
       const message = new Message ({
         title: req.body.title,
         text: req.body.text,
-        owner: currentUser._id
+        owner: req.user._id
       }).save(err => {
         if (err) { 
           return next(err);

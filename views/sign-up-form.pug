@@ -5,21 +5,21 @@ block content
   h1 #{title}
 
   form(method='POST' action='')
-  div.form-group
+    div.form-group
       label(for='fname') First Name:
-      input#fname.form-control(type='text', placeholder='Add your first name' name='fname' required='true' value='' )
+      input#fname.form-control(type='text', placeholder='Add your first name' name='fname' required='true')
       div.form-group
       label(for='lname') Last Name:
-      input#lname.form-control(type='text', placeholder='Add your last name' name='lname' required='true' value='' )
+      input#lname.form-control(type='text', placeholder='Add your last name' name='lname' required='true')
     div.form-group
       label(for='username') Username:
-      input#username.form-control(type='text', placeholder='Add your username' name='username' required='true' value='' )
+      input#username.form-control(type='text', placeholder='Add your username' name='username' required='true')
     div.form-group
-      label(for='password') Password:
-      input#password.form-control(type='text', placeholder='Add your password' name='password' required='true' value='' )
+      label(for='password1') Password:
+      input#password1.form-control(type='password', placeholder='Add your password' name='password1' required='true')
     div.form-group    
       label(for='passwordConfirmation') Password:
-      input#passwordConfirmation.form-control(type='text', placeholder='Confirm your password' name='passwordConfirmation' required='true' value='' )
+      input#passwordConfirmation.form-control(type='password', placeholder='Confirm your password' name='passwordConfirmation' required='true')
     button.btn.btn-primary(type='submit') Submit
   
   if errors 

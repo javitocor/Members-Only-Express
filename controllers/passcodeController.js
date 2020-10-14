@@ -18,10 +18,10 @@ exports.member_post  = [
       //Validate correct passcode
       if(req.body.member === process.env.MEMBER_PASSCODE) {
         //Modify user status.
-        User.findByIdAndUpdate(currentUser._id, {status: true}, function (err,theuser) {
+        User.findByIdAndUpdate(req.user._id, {status: true}, function (err,theuser) {
           if (err) { return next(err); }
              // Successful - redirect to index page.
-             res.redirect('index', { title: 'MessagesBoard' });
+             
           });        
       } else {
         res.redirect('index', { title: 'MessagesBoard' });
@@ -46,10 +46,10 @@ exports.admin_post = [
       //Validate correct passcode
       if(req.body.admin === process.env.ADMIN_PASSCODE) {
         //Modify user status.
-        User.findByIdAndUpdate(currentUser._id, {admin: true}, function (err,theuser) {
+        User.findByIdAndUpdate(req.user._id, {admin: true}, function (err,theuser) {
           if (err) { return next(err); }
              // Successful - redirect to index page.
-             res.redirect('index', { title: 'MessagesBoard' });
+             
           });        
       } else {
         res.redirect('index', { title: 'MessagesBoard' });

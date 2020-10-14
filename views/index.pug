@@ -3,10 +3,10 @@ extends layout
 block content
   h1 Welcome to #[em MembersOnlyClub], a very secret club only for members.
 
-  if !currentUser.status 
+  if currentUser && !currentUser.status 
     p
       a(href='/passcode/getmembership') Member Code
-  if !currentUser.admin 
+  if currentUser && !currentUser.admin 
     p
       a(href='/passcode/getadmin') Admin Code
   h2 #{title}
@@ -16,10 +16,10 @@ block content
       li 
         p #[strong Title:] #{message.title}
         p #[strong Message:] #{message.text}
-        if currentUser.status 
-          p #[strong Author:] #{message.owner}
-          p #[strong Date:] #{message.timestamp}
-        if currentUser.admin 
+        if currentUser && (currentUser.status || currentUser.admin) 
+          p #[strong Author:] #{message.owner.username}
+          p #[strong Date:] #{message.timestamp_formatted}
+        if currentUser && currentUser.admin 
           p
             a(href=message.url) Delete Message
     else

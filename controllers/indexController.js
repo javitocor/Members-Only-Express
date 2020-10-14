@@ -8,7 +8,7 @@ var async = require('async');
 
 
 exports.index = function(req, res, next) {
-  Message.find({}, 'title owner')
+  Message.find({}, 'title text owner')
     .populate('owner')
     .sort([['timestamp', 'descending']])
     .exec(function (err, list_messages) {
@@ -24,11 +24,13 @@ exports.signup_post = [
   // Validate and santise the name field.
   body('fname', 'First name required').isLength({ min: 3 }).trim().escape(),
   body('lname', 'Last Name required').isLength({ min: 2 }).trim().escape(),
-  body('password', 'Password required').isLength({ min: 5 }).trim().escape(),
+  body('password1', 'Password required').isLength({ min: 5 }).trim().escape(),
   body('username', 'Username required').isLength({ min: 3 }).trim().escape(),
   body('passwordConfirmation').custom((value, { req }) => {
-    if (value !== req.body.password) {
+    if (value !== req.body.password1) {
       throw new Error('Password confirmation does not match password');
+    }else {
+      return true;
     };
   }),
   (req, res, next) => {
@@ -38,7 +40,7 @@ exports.signup_post = [
       fname: req.body.fname,
       lname: req.body.lname,
       username: req.body.username,
-      password: req.body.password
+      password: req.body.password1
     });
     if (!errors.isEmpty()) {
       // There are errors. Render the form again with sanitized values/error messages.

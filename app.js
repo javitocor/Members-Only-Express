@@ -8,6 +8,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var User = require('./models/user')
 
 var indexRouter = require('./routes/index');
 var passcodeRouter = require('./routes/passcode');
@@ -65,6 +66,15 @@ passport.deserializeUser(function(id, done) {
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(function(req, res, next) {
+  if (req.user) {
+    app.locals.currentUser = req.user;
+  } else {
+    app.locals.currentUser = null;
+  }
+
+  next();
+});
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -72,10 +82,7 @@ app.use(cookieParser());
 app.use(helmet());
 app.use(compression()); // Compress all routes
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(function(req, res, next) {
-  res.locals.currentUser = req.user;
-  next();
-});
+
 
 app.use('/', indexRouter);
 app.use('/passcode', passcodeRouter);

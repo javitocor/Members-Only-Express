@@ -8,8 +8,8 @@ router.get('/getmembership', passcode_controller.member_get);
 //Post passcode membership
 router.post('/getmembership', passcode_controller.member_post);
 //Get passcode admin
-router.get('/getadmin', passcode_controller.admin.get);
+router.get('/getadmin', passcode_controller.admin_get);
 //Post passcode admin
-router.post('/getadmin', passcode_controller.admin.post);
+router.post('/getadmin', passcode_controller.admin_post);
 
 module.exports = router;
